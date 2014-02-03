@@ -1,17 +1,23 @@
 <?php
 
-//directiva de la conexion a la base de datos
-include_once "php/config.php";
-
-//directiva a la revision de conexion
-include_once"php/lock.php";
-
-//funciones auxiliares
-include_once"php/funaux.php";
+/*** Autoload class files ***/ 
+    function __autoload($class){
+      require('include/' . strtolower($class) . '.class.php');
+    }
+    
+    $funcbase = new dbutils;
+/*** conexion a bd ***/
+    $mysqli = $funcbase->conecta();
+    if (is_object($mysqli)) {
+/*** checa login***/
+        $funcbase->checalogin($mysqli);
+    } else {
+        die ("<h1>'No se establecio la conexion a bd'</h1>");
+    }
 
 if(isset($_POST['altaprov'])){
     
-   header('Location: modifprov.php');
+   header('location:modifprov2.php?nid=-99');
     
 }
 
@@ -33,7 +39,7 @@ if(isset($_POST['altaprov'])){
             $( ".ed" ).click(function(eventObject ) {
                 eventObject.preventDefault();
                 var currentId = $(this).attr('id');
-                window.open('modifprov.php?nid='+currentId,'_self')
+                window.open('modifprov2.php?nid='+currentId,'_self')
             });
             
             $( ".el" ).click(function(eventObject ) {
