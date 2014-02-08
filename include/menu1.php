@@ -22,7 +22,7 @@
                             <li><a href="clientes.php">Clientes</a></li>
                             <li><a href="proveedores.php">Proveedores</a></li>
                             <li><a href="productos.php">Productos</a></li>
-                            <li><a href="#url">Representantes</a></li>              
+                            <li><a href="representantes.php">Representantes</a></li>              
                         </ul>
                     </li>
                     <li><a href="index.php"><b>Salir</b></a></li>

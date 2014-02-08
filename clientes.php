@@ -1,18 +1,23 @@
 <?php
 
-//directiva de la conexion a la base de datos
-include_once "php/config.php";
-
-//directiva a la revision de conexion
-include_once "php/lock.php";
-
-//funciones auxiliares
-include_once"php/funaux.php";
+/*** Autoload class files ***/ 
+    function __autoload($class){
+      require('include/' . strtolower($class) . '.class.php');
+    }
+    
+    $funcbase = new dbutils;
+/*** conexion a bd ***/
+    $mysqli = $funcbase->conecta();
+    if (is_object($mysqli)) {
+/*** checa login***/
+        $funcbase->checalogin($mysqli);
+    } else {
+        die ("<h1>'No se establecio la conexion a bd'</h1>");
+    }
 
 if(isset($_POST['altacte'])){
     
-   header('Location: modifcte.php');
-    
+   header('location:modifcte2.php?nid=-99');
 }
 
 
@@ -33,7 +38,7 @@ if(isset($_POST['altacte'])){
             $( ".ed" ).click(function(eventObject ) {
                 eventObject.preventDefault();
                 var currentId = $(this).attr('id');
-                window.open('modifcte.php?nid='+currentId,'_self')
+                window.open('modifcte2.php?nid='+currentId,'_self')
             });
             
             $( ".el" ).click(function(eventObject ) {
@@ -51,7 +56,7 @@ if(isset($_POST['altacte'])){
 
 <!--LISTON DE ENCABEZADO ---------------------------------------------------------------------------------------->  
     <?php 
-  $titulo = "CLIENTES";
+  $titulo = "CATALOGO DE CLIENTES";
   include_once "include/barrasup.php";
  //------consulta a la base de datos------
   
@@ -64,8 +69,8 @@ if(isset($_POST['altacte'])){
     if(mysqli_num_rows($result2)) {
         echo '<table cellpadding="0" cellspacing="0" class="db-table">';
         echo '<tr>
-        <th>Editar</th><th>Eliminar</th><th>No.</th><th>Nombre</th><th>rfc</th><th>sucursal</th><th>Nombre Corto</th><th>Calle y No.</th><th>Delegación</th>
-        <th>ciudad</th><th>estado</th><th>CP</th><th>nivel</th>
+        <th>Editar</th><th>Eliminar</th><th>No.</th><th>Nombre</th><th>rfc</th><th>sucursal</th><th>Nombre Corto</th><th>Calle y No.</th>
+        <th>Colonia</th><th>Delegación</th><th>ciudad</th><th>estado</th><th>CP</th><th>nivel</th>
         </tr>';
         //inicializacion de contador de renglon
         $reng = 1;

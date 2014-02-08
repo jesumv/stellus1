@@ -14,9 +14,9 @@
         die ("<h1>'No se establecio la conexion a bd'</h1>");
     }
 
-if(isset($_POST['altaprod'])){
+if(isset($_POST['altarep'])){
     
-   header('location:modifprod.php?nid=-99');
+   header('location:modifrep.php?nid=-99');
 }
 
 
@@ -36,13 +36,13 @@ if(isset($_POST['altaprod'])){
             $( ".ed" ).click(function(eventObject ) {
                 eventObject.preventDefault();
                 var currentId = $(this).attr('id');
-                window.open('modifprod.php?nid='+currentId,'_self')
+                window.open('modifrep.php?nid='+currentId,'_self')
             });
             
             $( ".el" ).click(function(eventObject ) {
                 eventObject.preventDefault();
                 var currentId = $(this).attr('id');
-                window.open('elimprod.php?nid='+currentId,'_self')
+                window.open('elimrep.php?nid='+currentId,'_self')
             });
         });
   </script>
@@ -54,21 +54,20 @@ if(isset($_POST['altaprod'])){
 
 <!--LISTON DE ENCABEZADO ---------------------------------------------------------------------------------------->  
     <?php 
-  $titulo = "CATALOGO DE PRODUCTOS";
+  $titulo = "CATALOGO DE REPRESENTANTES";
   include_once "include/barrasup.php";
  //------consulta a la base de datos------
   
 
 //-----CONSTRUCCION DE LA TABLA------------------------------------------------------------------------
- $table = 'productos';
- $sql= "SELECT idproductos,descripcion,unidad,precio1,precio2,precio3,precio4,codigo FROM $table WHERE status != 2 ";
+ $table = 'representantes';
+ $sql= "SELECT idrepresentantes,paterno,materno,nombre,noM_corto,porccomision FROM $table WHERE status != 2 ";
  $result2 = mysqli_query($mysqli,$sql) or die('no hay resultados para '.$table);
 
     if(mysqli_num_rows($result2)) {
         echo '<table cellpadding="0" cellspacing="0" class="db-table">';
         echo '<tr>
-        <th>Editar</th><th>Eliminar</th><th>No.</th><th>Descripcion</th><th>unidad</th><th>Precio 1</th><th>Precio 2</th><th>Precio 3</th>
-        <th>Precio 4</th><th>Codigo</th>
+        <th>Editar</th><th>Eliminar</th><th>No.</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Nombre</th><th>Nombre Corto</th><th>Porcentaje de Comision</th>
         </tr>';
         //inicializacion de contador de renglon
         $reng = 1;
@@ -96,7 +95,7 @@ if(isset($_POST['altaprod'])){
   ?> 
   
 <div class="cajacentrada"><form action="<?php echo $_SERVER['PHP_SELF']; ?>" method = "POST"> 
-   <input type="submit" name ="altaprod" value="nuevo producto" /> 
+   <input type="submit" name ="altarep" value="nuevo representante" /> 
    </form>
 </div>
   

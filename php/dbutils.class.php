@@ -70,6 +70,17 @@
             }
         }
         
+        public function eliminareg($tabla,$campo, $valor){
+        //***esta funcion marca un registro con status 2 de cancelado, asi como el usuario y fecha del movimiento***/
+		   $usu = $_SESSION['username'];
+		   $sql= "UPDATE $tabla SET status = 2, usu = '$usu' WHERE $campo =-".$valor;
+		   $result2 = mysqli_query($mysqli,$sql) or die('no hay resultados para '.$table);
+		    /* liberar la serie de resultados */
+		  mysqli_free_result($result2);
+		  /* cerrar la conexión */
+			 return $result2;
+        }
+        
         
 	
 	}/*** fin de la clase ***/

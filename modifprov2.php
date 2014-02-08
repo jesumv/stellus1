@@ -1,10 +1,6 @@
 <?php
 global $num;
-global $numid;
-if (isset($_GET['nid'])) {
-    $numid = $_GET['nid'];   	
-}
-
+//este script administra la actualizacion de un proveedor
 //conectar
 /*** Autoload class files ***/ 
     function __autoload($class){
@@ -20,18 +16,21 @@ if (isset($_GET['nid'])) {
         
 function oprimio($mysqli,$numid){
 //esta funcion hace las consultas de actualizacion
+	$table = 'proveedores';
      $nombre =strtoupper($_POST ['nom']) ;
      $corto =strtoupper($_POST ['corto']) ;
      $dir=strtoupper($_POST ['dir']) ;
      $usu = $_SESSION['username'];
-     
-    if ($numid == -99) {
-        $sqlCommand= "INSERT INTO proveedores (razon_social,nom_corto,direccion,usu,status)
+
+	 
+    if (!is_numeric($numid)) {
+        $sqlCommand= "INSERT INTO $table (razon_social,nom_corto,direccion,usu,status)
         VALUES ('$nombre','$corto','$dir','$usu',0)"
         or die('insercion cancelada '.$table);
+		
     }else {
-        $sqlCommand = "UPDATE proveedores SET razon_social ='$nombre', nom_corto='$corto',
-         direccion = '$dir', usu = '$usu' status = 2 WHERE idproveedores='$numid' LIMIT 1"
+        $sqlCommand = "UPDATE $table SET razon_social ='$nombre', nom_corto='$corto',
+         direccion = '$dir', usu = '$usu',status = 1 WHERE idproveedores= $numid LIMIT 1"
          or die('actualizacion cancelada ');
     }
     // Execute the query here now
@@ -42,13 +41,15 @@ function oprimio($mysqli,$numid){
     mysqli_close($mysqli);  
 }
 /***si se oprimio el boton de accion***/
+
 if(isset($_POST['enviomod'])){
-    oprimio($mysqli, $num);
+	$numero = strtoupper($_POST ['num']) ;
+    oprimio($mysqli, $numero);
     header('Location: proveedores.php');
 }
 
 
-/***obtiene el resultado***/
+/***obtiene los datos de acuerdo con el parametro recibido en la pagina***/
         if(isset($_GET['nid'])){
  
             if($_GET['nid']== -99){
@@ -109,7 +110,7 @@ if(isset($_POST['enviomod'])){
   
   <div class="cajacentra">
 
-    <form id="modifprov" action="<?php echo $_SERVER['PHP_SELF']; ?>" method = "POST">
+    <form id="modifprov" action="<?php echo $_SERVER['PHP_SELF'];?>" method = "POST">
         
        <table  class="db-table">
           
@@ -117,7 +118,8 @@ if(isset($_POST['enviomod'])){
         
      <tr>
             <td >No.</td> 
-            <?php  
+            <?php 
+            echo "<td><input type='hidden' id='num' name ='num' value = $num size = '60'/> </td>";
             echo "<td>$num</td>";
             echo "<td >NOMBRE O RAZON SOCIAL:</td> ";
             echo "<td><input id='inic' name ='nom' value = '$nombre'  size = '60'/> </td>";

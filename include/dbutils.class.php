@@ -54,7 +54,7 @@
         }
         
         public function leetodos($mysqli,$table,$filtro='1'){
-          //***lee todos los datos de una tabla ***/
+          //***lee todos los datos de una tabla, un registro o todos los registros, de acuerdo con el argumento $filtro ***/
             $sql= "SELECT * FROM $table WHERE ".$filtro;
             $result = mysqli_query($mysqli,$sql);
             $result2 = mysqli_fetch_row($result);

@@ -57,14 +57,14 @@ if(isset($_POST['altaprov'])){
 
 <!--LISTON DE ENCABEZADO ---------------------------------------------------------------------------------------->  
     <?php 
-  $titulo = "PROVEEDORES";
+  $titulo = "CATALOGO DE PROVEEDORES";
   include_once "include/barrasup.php";
  //------consulta a la base de datos------
   
 
 //-----CONSTRUCCION DE LA TABLA------------------------------------------------------------------------
  $table = 'proveedores';
- $sql= "SELECT idproveedores,razon_social,nom_corto,direccion FROM proveedores WHERE status != 2 ";
+ $sql= "SELECT idproveedores,razon_social,nom_corto,direccion FROM $table WHERE status != 2 ";
  $result2 = mysqli_query($mysqli,$sql) or die('no hay resultados para '.$table);
 
     if(mysqli_num_rows($result2)) {
