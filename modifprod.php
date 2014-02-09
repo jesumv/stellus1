@@ -103,13 +103,23 @@ if(isset($_POST['enviomod'])){
 <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
 <link rel="stylesheet" type="text/CSS" href="css/plantilla2.css" />
 <link rel="stylesheet" type="text/CSS" href="css/dropdown_two.css" />
+<link rel="stylesheet" href="css/themename/jquery-ui.custom.css" />
 <title>STELLUS MEDEVICES</title>
 
 <script src="js/jquery-1.11.0.js"></script>
+<script src="js/jquery-ui.custom.min.js"></script>
   <script>
   $( document ).ready(function() {
-       $('#inic').focus();  
+       $('#inic').focus(); 
+       $("#proveedor").autocomplete(
+		"get_prov_list.php", {
+        width: 260,
+        matchContains: true,
+        selectFirst: false
+    }
+); 
 });
+
   </script>
 </head>
 
@@ -139,7 +149,7 @@ if(isset($_POST['enviomod'])){
 				echo "<td>Nombre Corto</td>";
 				echo "<td><input name ='corto' value = '$corto'  size = '30'/> </td>";
 				echo "<td>Proveedor</td>";
-				echo "<td><input name ='proveedor' value = '$proveedor'/></td>";
+				echo "<td><input name ='proveedor' id='proveedor' value = '$proveedor'/></td>";
      echo "</tr>";
             echo "<tr>";
 				echo "<td >Unidad:</td> ";
