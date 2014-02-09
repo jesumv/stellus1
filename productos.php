@@ -61,17 +61,16 @@ if(isset($_POST['altaprod'])){
 
 //-----CONSTRUCCION DE LA TABLA------------------------------------------------------------------------
  $table = 'productos';
- $sql= "SELECT idproductos,descripcion,unidad,precio1,precio2,precio3,precio4,codigo FROM $table WHERE status != 2 ";
+ $sql= "SELECT idproductos,descripcion,unidad,precio1,precio2,precio3,precio4,codigo,idproveedores FROM $table WHERE status != 2 ";
  $result2 = mysqli_query($mysqli,$sql) or die('no hay resultados para '.$table);
 
     if(mysqli_num_rows($result2)) {
         echo '<table cellpadding="0" cellspacing="0" class="db-table">';
         echo '<tr>
         <th>Editar</th><th>Eliminar</th><th>No.</th><th>Descripcion</th><th>unidad</th><th>Precio 1</th><th>Precio 2</th><th>Precio 3</th>
-        <th>Precio 4</th><th>Codigo</th>
+        <th>Precio 4</th><th>Codigo</th><th>proveedor</th>
         </tr>';
         //inicializacion de contador de renglon
-        $reng = 1;
         while($row2 = mysqli_fetch_row($result2)) {
             $id = $row2[0];
             $elid = -$row2[0];
@@ -82,7 +81,7 @@ if(isset($_POST['altaprod'])){
                 echo '<td>',$value,'</td>';
             }
             echo '</tr>';
-        $reng= $reng++;
+
         }
         echo '</table><br />';
     }

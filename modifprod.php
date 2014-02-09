@@ -67,6 +67,7 @@ if(isset($_POST['enviomod'])){
                 $precio3 = "";
                 $precio4= "";
 				$codigo="";
+				$proveedor="";
                 //titulo del boton de la forma
                 $titbot = "Insertar";
                 
@@ -137,22 +138,24 @@ if(isset($_POST['enviomod'])){
 				echo "<td><input id='inic' name ='desc' value = '$desc'  size = '60'/> </td>";
 				echo "<td>Nombre Corto</td>";
 				echo "<td><input name ='corto' value = '$corto'  size = '30'/> </td>";
-				echo "<td >Unidad:</td> ";
-                echo "<td><input  name ='unidad' value = '$unidad'  size = '30'/> </td>";
+				echo "<td>Proveedor</td>";
+				echo "<td><input name ='proveedor' value = '$proveedor'/></td>";
      echo "</tr>";
             echo "<tr>";
+				echo "<td >Unidad:</td> ";
+                echo "<td><input  name ='unidad' value = '$unidad'  size = '30'/> </td>";
                 echo "<td >Precio 1</td> ";
                 echo "<td ><input name ='precio1' value = '$precio1' /></td>";
 				echo "<td >Precio 2</td> ";
                 echo "<td ><input name ='precio2' value = '$precio2' /></td>";
                 echo " <td>Precio 3</td>";
                 echo "<td ><input name ='precio3' value = '$precio3' /></td>";
-              	echo "<td> Precio 4</td>";
-                echo "<td ><input name ='precio4' value = '$precio4'/></td>";
            echo "</tr>";
 		   echo "<tr>";
-		   		echo "<td colspan='4'>Codigo</td>";
-                echo "<td colspan='2'><input name ='codigo' value = '$codigo'/></td>";
+		   		echo "<td> Precio 4</td>";
+                echo "<td ><input name ='precio4' value = '$precio4'/></td>";
+		   		echo "<td>Codigo</td>";
+                echo "<td><input name ='codigo' value = '$codigo'/></td>";
            echo "</tr>"; 
             ?>         
      </tr>
